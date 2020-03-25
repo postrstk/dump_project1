@@ -47,6 +47,7 @@ QString MainWindow::getCorrectDataFromHex(const QString &filename)
     fileData << file.readLine();
   }
 
+  file.close();
   if (fileData.length() != 3) {
     return ret;
   }
