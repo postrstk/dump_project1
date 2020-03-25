@@ -30,8 +30,39 @@ void MainWindow::slotWrite()
 
 void MainWindow::slotConnect()
 {
-  qDebug() << getCorrectDataFromHex("my_new1.hex");
+    qDebug() << getCorrectDataFromHex("my_new1.hex");
 }
+
+double MainWindow::hex2double(const std::string &hex)
+{
+    union
+    {
+        long long i;
+        double  d;
+    } value;
+
+    value.i = std::stoll(hex,nullptr,16);
+    return value.d;
+}
+
+std::string MainWindow::double2hex(double d)
+{
+    union
+    {
+        long long i;
+        double    d;
+    } value;
+
+   value.d = d;
+
+   char buf[17];
+
+   snprintf (buf,sizeof(buf),"%016llx",value.i);
+   buf[16]=0; //make sure it is null terminated.
+
+   return std::string(buf);
+}
+
 
 QString MainWindow::getCorrectDataFromHex(const QString &filename)
 {
