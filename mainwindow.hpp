@@ -4,7 +4,9 @@
 #include <QMainWindow>
 #include <QFile>
 #include <QString>
-
+#include <QList>
+#include <QLabel>
+#include <QLineEdit>
 
 struct comand
 {
@@ -29,10 +31,17 @@ private slots:
   void slotConnect();
   double hex2double(const std::string& hex);
   std::string double2hex(double d);
+  
+private:
+  QString dataFromInput(const int index);
+  void setDataToOutput(const int index, const QString& data);
+  
 public:
     QString getCorrectDataFromHex(const QString& filename);
 
 private:
+  QList<QLabel*> outputs;
+  QList<QLineEdit*> inputs;
   Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_HPP
