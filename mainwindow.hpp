@@ -11,20 +11,12 @@
 
 struct nameFile
 {
-    QString addr1 = "1.hex";
-    QString addr2 = "2.hex";
-    QString addr3 = "3.hex";
-    QString addr4 = "4.hex";
-    QString addr5 = "5.hex";
-    QString addr6 = "6.hex";
-    QString addr7 = "7.hex";
-    QString addr8 = "8.hex";
-    QString addr9 = "9.hex";
-    QString addr10 = "10.hex";
-    QString addr11 = "11.hex";
-    QString addr12 = "12.hex";
-    QString addr13 = "13.hex";
-    QString addr14 = "14.hex";
+  QList<QString> addr{
+  "1.hex", "2.hex", "3.hex", "4.hex",
+  "5.hex", "6.hex", "7.hex", "8.hex",
+  "9.hex", "10.hex", "11.hex", "12.hex",
+  "13.hex", "14.hex"
+  };
 };
 
 struct addrRead
