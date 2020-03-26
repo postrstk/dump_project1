@@ -11,6 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->button_connect, &QPushButton::clicked, this, &MainWindow::slotConnect);
   connect(ui->button_read, &QPushButton::clicked, this, &MainWindow::slotRead);
   connect(ui->button_write, &QPushButton::clicked, this, &MainWindow::slotWrite);
+  for(int i = 0; i < 14; ++i) {
+    this->outputs.push_back(ui->centralwidget->findChild<QLabel*>("output_"+QString::number(i)));
+    this->inputs.push_back(ui->centralwidget->findChild<QLineEdit*>("input_"+QString::number(i)));
+  }
 }
 
 MainWindow::~MainWindow()
@@ -63,6 +67,16 @@ std::string MainWindow::double2hex(double d)
    return std::string(buf);
 }
 
+QString MainWindow::dataFromInput(const int index)
+{
+  return this->inputs.at(index)->text();
+}
+
+void MainWindow::setDataToOutput(const int index, const QString &data)
+{
+  this->outputs.at(index)->setText(data);
+}
+
 
 QString MainWindow::getCorrectDataFromHex(const QString &filename)
 {
@@ -79,6 +93,7 @@ QString MainWindow::getCorrectDataFromHex(const QString &filename)
   }
 
   file.close();
+
   if (fileData.length() != 3) {
     return ret;
   }
