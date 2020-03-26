@@ -45,6 +45,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::slotRead()
 {
+    readData();
+    QString tmp = getCorrectDataFromHex("my_new1.hex");
+    double f = hex2double(tmp.toStdString());
+    setDataToOutput(0,QString::number(f));
   // Read some data and write into outputs
 }
 
