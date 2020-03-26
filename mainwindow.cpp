@@ -240,63 +240,63 @@ void MainWindow::writeData(int num, double data)
         comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr2+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
     case 2:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr3+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr3+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr3+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr3+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 3:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr4+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr4+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr4+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr4+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 4:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr5+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr5+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr5+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr5+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 5:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr6+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr6+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr6+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr6+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 6:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr7+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr7+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr7+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr7+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 7:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr8+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr8+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr8+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr8+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 8:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr9+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr9+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr9+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr9+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 9:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr10+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr10+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr10+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr10+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 10:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr11+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr11+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr11+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr11+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 11:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr12+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr12+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr12+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr12+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 12:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr13+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr13+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr13+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr13+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     case 13:
-        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr14+" "+QString::fromUtf8(firstHex.c_str());
-        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr14+" "+QString::fromUtf8(secondHex.c_str());
+        comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr14+" "+"0x"+QString::fromUtf8(firstHex.c_str());
+        comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr14+" "+"0x"+QString::fromUtf8(secondHex.c_str());
         break;
 
     default:
