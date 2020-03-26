@@ -14,6 +14,15 @@ MainWindow::MainWindow(QWidget *parent)
   for(int i = 0; i < 14; ++i) {
     this->outputs.push_back(ui->centralwidget->findChild<QLabel*>("output_"+QString::number(i)));
     this->inputs.push_back(ui->centralwidget->findChild<QLineEdit*>("input_"+QString::number(i)));
+    connect(this->inputs.at(i), &QLineEdit::textChanged, [=](const QString& text){
+      if (text.isEmpty()) {
+        inputs.at(i)->setStyleSheet("QLineEdit{border:1px solid #ff1c1c}");
+      }
+      else {
+        inputs.at(i)->setStyleSheet("QLineEdit{border:1px solid #757575}");
+      }
+    });
+    emit this->inputs.at(i)->textChanged("");
   }
 }
 
