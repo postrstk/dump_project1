@@ -7,7 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>845</width>
+<<<<<<< HEAD
     <height>921</height>
+=======
+    <height>894</height>
+>>>>>>> 49f41730042a36648043b09a50cb5ef9f3133df0
    </rect>
   </property>
   <property name="windowTitle">
@@ -734,7 +738,11 @@ min-width:50px;
      <x>0</x>
      <y>0</y>
      <width>845</width>
+<<<<<<< HEAD
      <height>21</height>
+=======
+     <height>25</height>
+>>>>>>> 49f41730042a36648043b09a50cb5ef9f3133df0
     </rect>
    </property>
   </widget>

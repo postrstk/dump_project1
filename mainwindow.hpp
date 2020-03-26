@@ -7,6 +7,7 @@
 #include <QList>
 #include <QLabel>
 #include <QLineEdit>
+<<<<<<< HEAD
 
 struct addr
 {
@@ -25,6 +26,8 @@ struct addr
     QString addr13 = "0x08080196";
     QString addr14 = "0x08080204";
 };
+=======
+>>>>>>> 49f41730042a36648043b09a50cb5ef9f3133df0
 
 struct addrSec
 {
