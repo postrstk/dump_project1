@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     });
     emit this->inputs.at(i)->textChanged("");
   }
+//  testConnect();
+
 }
 
 MainWindow::~MainWindow()
@@ -74,6 +76,24 @@ std::string MainWindow::double2hex(double d)
    buf[16]=0; //make sure it is null terminated.
 
    return std::string(buf);
+}
+
+void MainWindow::readData()
+{
+
+}
+
+bool MainWindow::testConnect()
+{
+    process = new QProcess(this);
+    process->start("cmd.exe",QStringList() << "/c ST-LINK_CLI.exe -c UR >conection.txt");
+    if(process->waitForStarted()){
+        qDebug() << "Starting";
+    }
+    process->waitForFinished(-1);
+        qDebug() << "finish";
+
+//    process->start("ping","mail.ru > test.txt",QProcess::ReadOnly);
 }
 
 QString MainWindow::dataFromInput(const int index)
