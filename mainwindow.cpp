@@ -50,6 +50,7 @@ void MainWindow::slotRead()
       QString tmp = getCorrectDataFromHex(this->nameF.addr[i]);
       double f = hex2double(tmp.toStdString());
       setDataToOutput(i,QString::number(f));
+      setDataToInput(i, QString::number(f));
     }
 }
 
@@ -378,6 +379,12 @@ QString MainWindow::dataFromInput(const int index)
 void MainWindow::setDataToOutput(const int index, const QString &data)
 {
   this->outputs.at(index)->setText(data);
+}
+
+void MainWindow::setDataToInput(const int index, const QString &data)
+{
+  this->inputs.at(index)->setText(data);
+  emit this->inputs.at(index)->textChanged(data);
 }
 
 
