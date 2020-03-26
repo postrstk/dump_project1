@@ -108,6 +108,8 @@ private:
   void readData();
   void writeData(int num, double data);
   bool testConnect();
+  bool checkSTMConnect(const QStringList& list);
+
 public:
     QString getCorrectDataFromHex(const QString& filename);
 
@@ -120,5 +122,7 @@ private:
   addrSec adr2;
   addrRead addrRead;
   nameFile nameF;
+  bool isConnect{false};
+
 };
 #endif // MAINWINDOW_HPP

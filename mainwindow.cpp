@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 #include <iostream>
 #include <QDebug>
+#include <QRegularExpression>
 
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent)
@@ -11,9 +12,25 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->button_connect, &QPushButton::clicked, this, &MainWindow::slotConnect);
   connect(ui->button_read, &QPushButton::clicked, this, &MainWindow::slotRead);
   connect(ui->button_write, &QPushButton::clicked, this, &MainWindow::slotWrite);
+
+  ui->button_read->setEnabled(this->isConnect);
+  ui->button_write->setEnabled(this->isConnect);
+
   for(int i = 0; i < 14; ++i) {
     this->outputs.push_back(ui->centralwidget->findChild<QLabel*>("output_"+QString::number(i)));
     this->inputs.push_back(ui->centralwidget->findChild<QLineEdit*>("input_"+QString::number(i)));
+
+    connect(this->inputs.at(i), &QLineEdit::textChanged, [=](const QString& text){
+      if (text.isEmpty()) {
+        inputs.at(i)->setStyleSheet("QLineEdit{border:1px solid #ff1c1c}");
+      }
+      else {
+        inputs.at(i)->setStyleSheet("QLineEdit{border:1px solid #757575}");
+      }
+    });
+    emit this->inputs.at(i)->textChanged("");
+
+    this->setDataToOutput(i, "00000000");
   }
   writeData(0,12.5);
   readData();
@@ -38,7 +55,10 @@ void MainWindow::slotWrite()
 
 void MainWindow::slotConnect()
 {
-    qDebug() << getCorrectDataFromHex("my_new1.hex");
+  this->isConnect = true;
+  ui->button_read->setEnabled(this->isConnect);
+  ui->button_write->setEnabled(this->isConnect);
+//    qDebug() << getCorrectDataFromHex("my_new1.hex");
 }
 
 double MainWindow::hex2double(const std::string &hex)
@@ -307,7 +327,38 @@ bool MainWindow::testConnect()
         qDebug() << "finish";
     delete process;
 
-//    process->start("ping","mail.ru > test.txt",QProcess::ReadOnly);
+        //    process->start("ping","mail.ru > test.txt",QProcess::ReadOnly);
+}
+
+bool MainWindow::checkSTMConnect(const QStringList &list)
+{
+  if(list.isEmpty()) {
+    return false;
+  }
+  QRegularExpression re("No target connected");
+  foreach(const QString& line, list) {
+
+    QRegularExpressionMatch match = re.match(line);
+    if(match.hasMatch()) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool MainWindow::checkSTMConnect(const QString &filename)
+{
+  QStringList fileData;
+
+  QFile file(filename);
+  if(!file.open(QIODevice::ReadOnly)) {
+    return false;
+  }
+  while(!file.atEnd()) {
+    fileData << file.readLine();
+  }
+
+  return this->checkSTMConnect(fileData);
 }
 
 QString MainWindow::dataFromInput(const int index)
