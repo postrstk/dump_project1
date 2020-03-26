@@ -62,13 +62,13 @@ private slots:
   void slotRead();
   void slotWrite();
   void slotConnect();
-  double hex2double(const std::string& hex);
-  std::string double2hex(double d);
+
   
 private:
   QString dataFromInput(const int index);
   void setDataToOutput(const int index, const QString& data);
-  
+  double hex2double(const std::string& hex);
+  std::string double2hex(double d);
 public:
     QString getCorrectDataFromHex(const QString& filename);
 
