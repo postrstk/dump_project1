@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include <QDebug>
+#include <QRegularExpression>
 
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent)
@@ -18,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
   for(int i = 0; i < 14; ++i) {
     this->outputs.push_back(ui->centralwidget->findChild<QLabel*>("output_"+QString::number(i)));
     this->inputs.push_back(ui->centralwidget->findChild<QLineEdit*>("input_"+QString::number(i)));
+
     connect(this->inputs.at(i), &QLineEdit::textChanged, [=](const QString& text){
       if (text.isEmpty()) {
         inputs.at(i)->setStyleSheet("QLineEdit{border:1px solid #ff1c1c}");
@@ -27,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent)
       }
     });
     emit this->inputs.at(i)->textChanged("");
+
+    this->setDataToOutput(i, "00000000");
   }
 //  testConnect();
 
@@ -100,7 +104,38 @@ bool MainWindow::testConnect()
     process->waitForFinished(-1);
         qDebug() << "finish";
 
-//    process->start("ping","mail.ru > test.txt",QProcess::ReadOnly);
+        //    process->start("ping","mail.ru > test.txt",QProcess::ReadOnly);
+}
+
+bool MainWindow::checkSTMConnect(const QStringList &list)
+{
+  if(list.isEmpty()) {
+    return false;
+  }
+  QRegularExpression re("No target connected");
+  foreach(const QString& line, list) {
+
+    QRegularExpressionMatch match = re.match(line);
+    if(match.hasMatch()) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool MainWindow::checkSTMConnect(const QString &filename)
+{
+  QStringList fileData;
+
+  QFile file(filename);
+  if(!file.open(QIODevice::ReadOnly)) {
+    return false;
+  }
+  while(!file.atEnd()) {
+    fileData << file.readLine();
+  }
+
+  return this->checkSTMConnect(fileData);
 }
 
 QString MainWindow::dataFromInput(const int index)

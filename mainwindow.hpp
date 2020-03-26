@@ -73,6 +73,8 @@ private:
   std::string double2hex(double d);
   void readData();
   bool testConnect();
+  bool checkSTMConnect(const QStringList& list);
+
 public:
     QString getCorrectDataFromHex(const QString& filename);
 
