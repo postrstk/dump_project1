@@ -7,6 +7,8 @@
 #include <QList>
 #include <QLabel>
 #include <QLineEdit>
+#include <QProcess>
+
 
 
 struct addr
@@ -69,6 +71,8 @@ private:
   void setDataToOutput(const int index, const QString& data);
   double hex2double(const std::string& hex);
   std::string double2hex(double d);
+  void readData();
+  bool testConnect();
 public:
     QString getCorrectDataFromHex(const QString& filename);
 
@@ -76,5 +80,6 @@ private:
   QList<QLabel*> outputs;
   QList<QLineEdit*> inputs;
   Ui::MainWindow *ui;
+  QProcess *process;
 };
 #endif // MAINWINDOW_HPP
