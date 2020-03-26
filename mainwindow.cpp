@@ -55,6 +55,10 @@ void MainWindow::slotRead()
 void MainWindow::slotWrite()
 {
   // Write data from inputs
+    for (int i = 0; i <14;i++)
+    {
+        writeData(i,dataFromInput(i).toDouble());
+    }
 }
 
 void MainWindow::slotConnect()
