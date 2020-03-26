@@ -74,6 +74,7 @@ private:
   void readData();
   bool testConnect();
   bool checkSTMConnect(const QStringList& list);
+  bool checkSTMConnect(const QString& filename);
 
 public:
     QString getCorrectDataFromHex(const QString& filename);
