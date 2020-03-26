@@ -81,5 +81,6 @@ private:
   QList<QLineEdit*> inputs;
   Ui::MainWindow *ui;
   QProcess *process;
+  bool isConnect{false};
 };
 #endif // MAINWINDOW_HPP

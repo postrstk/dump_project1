@@ -26,6 +26,9 @@
 
 	font: 14pt &quot;MS Shell Dlg 2&quot;;
 }
+QPushButton:disabled {	
+	background-color: rgba(25, 118, 210, 50);
+}
 QPushButton:hovered {
 background-color: rgb(21, 101, 192);
 }

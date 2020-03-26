@@ -11,6 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->button_connect, &QPushButton::clicked, this, &MainWindow::slotConnect);
   connect(ui->button_read, &QPushButton::clicked, this, &MainWindow::slotRead);
   connect(ui->button_write, &QPushButton::clicked, this, &MainWindow::slotWrite);
+
+  ui->button_read->setEnabled(this->isConnect);
+  ui->button_write->setEnabled(this->isConnect);
+
   for(int i = 0; i < 14; ++i) {
     this->outputs.push_back(ui->centralwidget->findChild<QLabel*>("output_"+QString::number(i)));
     this->inputs.push_back(ui->centralwidget->findChild<QLineEdit*>("input_"+QString::number(i)));
@@ -45,7 +49,10 @@ void MainWindow::slotWrite()
 
 void MainWindow::slotConnect()
 {
-    qDebug() << getCorrectDataFromHex("my_new1.hex");
+  this->isConnect = true;
+  ui->button_read->setEnabled(this->isConnect);
+  ui->button_write->setEnabled(this->isConnect);
+//    qDebug() << getCorrectDataFromHex("my_new1.hex");
 }
 
 double MainWindow::hex2double(const std::string &hex)
