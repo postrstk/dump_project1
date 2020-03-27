@@ -41,37 +41,37 @@ struct addr
 {
     QString addr1 = "0x08080100";
     QString addr2 = "0x08080108";
-    QString addr3 = "0x08080116";
-    QString addr4 = "0x08080124";
-    QString addr5 = "0x08080132";
-    QString addr6 = "0x08080140";
-    QString addr7 = "0x08080148";
-    QString addr8 = "0x08080156";
-    QString addr9 = "0x08080164";
-    QString addr10 = "0x08080172";
-    QString addr11 = "0x08080180";
-    QString addr12 = "0x08080188";
-    QString addr13 = "0x08080196";
-    QString addr14 = "0x08080204";
+    QString addr3 = "0x08080110";
+    QString addr4 = "0x08080118";
+    QString addr5 = "0x08080120";
+    QString addr6 = "0x08080128";
+    QString addr7 = "0x08080130";
+    QString addr8 = "0x08080138";
+    QString addr9 = "0x08080140";
+    QString addr10 = "0x08080148";
+    QString addr11 = "0x08080150";
+    QString addr12 = "0x08080158";
+    QString addr13 = "0x08080160";
+    QString addr14 = "0x08080168";
 };
 
 
 struct addrSec
 {
     QString addr1 = "0x08080104";
-    QString addr2 = "0x08080112";
-    QString addr3 = "0x08080120";
-    QString addr4 = "0x08080128";
-    QString addr5 = "0x08080136";
-    QString addr6 = "0x08080144";
-    QString addr7 = "0x08080152";
-    QString addr8 = "0x08080160";
-    QString addr9 = "0x08080168";
-    QString addr10 = "0x08080176";
-    QString addr11 = "0x08080184";
-    QString addr12 = "0x08080192";
-    QString addr13 = "0x08080200";
-    QString addr14 = "0x08080208";
+    QString addr2 = "0x0808010с";
+    QString addr3 = "0x08080114";
+    QString addr4 = "0x0808011с";
+    QString addr5 = "0x08080124";
+    QString addr6 = "0x0808012с";
+    QString addr7 = "0x08080134";
+    QString addr8 = "0x0808013с";
+    QString addr9 = "0x08080144";
+    QString addr10 = "0x0808014с";
+    QString addr11 = "0x08080154";
+    QString addr12 = "0x0808015с";
+    QString addr13 = "0x08080164";
+    QString addr14 = "0x0808016с";
 };
 
 QT_BEGIN_NAMESPACE

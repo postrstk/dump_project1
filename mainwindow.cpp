@@ -32,8 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->setDataToOutput(i, "00000000");
   }
-  writeData(0,12.5);
-  readData();
+//  qDebug() << nameF.addr.size();
 //  testConnect();
 
 }
@@ -46,6 +45,7 @@ MainWindow::~MainWindow()
 void MainWindow::slotRead()
 {
     readData();
+
     for(int i = 0; i < this->nameF.addr.size(); ++i ) {
       QString tmp = getCorrectDataFromHex(this->nameF.addr[i]);
       double f = hex2double(tmp.toStdString());
@@ -57,7 +57,7 @@ void MainWindow::slotRead()
 void MainWindow::slotWrite()
 {
   // Write data from inputs
-    for (int i = 0; i <14;i++)
+    for (int i = 0; i <13;i++)
     {
         writeData(i,dataFromInput(i).toDouble());
     }
@@ -234,8 +234,6 @@ void MainWindow::writeData(int num, double data)
     case 0:
         comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr1+" "+"0x"+QString::fromUtf8(firstHex.c_str());
         comandS="ST-LINK_CLI.exe -c UR -w32 "+adr2.addr1+" "+"0x"+QString::fromUtf8(secondHex.c_str());
-        qDebug() << comandF;
-        qDebug() << comandS;
         break;
     case 1:
         comandF="ST-LINK_CLI.exe -c UR -w32 "+adr1.addr2+" "+"0x"+QString::fromUtf8(firstHex.c_str());
