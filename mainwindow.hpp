@@ -103,6 +103,9 @@ private:
   bool testConnect();
   bool checkSTMConnect(const QStringList& list);
   bool checkSTMConnect(const QString& filename);
+  bool buildOutputFile(const QString& filename);
+  QByteArray solveCheckSum(QByteArray& bytes);
+  QByteArray buildOutputLine(QByteArray& data, int& offset);
 
 public:
     QString getCorrectDataFromHex(const QString& filename);

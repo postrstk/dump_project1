@@ -374,6 +374,78 @@ bool MainWindow::checkSTMConnect(const QString &filename)
   return this->checkSTMConnect(fileData);
 }
 
+QByteArray MainWindow::solveCheckSum(QByteArray& arr)
+{
+    QByteArray work = QByteArray::fromHex(arr);
+
+    char sum = 0;
+    foreach (char c, work)
+        sum += c;
+
+    sum = -sum;
+
+    return QByteArray::fromRawData(&sum, 1).toHex().toUpper();
+}
+
+QByteArray MainWindow::buildOutputLine(QByteArray& data, int &offset)
+{
+    //Start code
+    QByteArray startRet = ":";
+    QByteArray ret;
+
+    //Byte count
+    QByteArray tmp = QString::number( data.length()/2, 16 ).toUpper().toUtf8();
+    if(tmp.length() == 1) tmp = "0"+tmp;
+    ret.push_back(tmp);
+
+    //Address
+    tmp = QString::number( offset, 16 ).toUpper().toUtf8();
+    while(tmp.length() < 4)
+        tmp.push_front("0");
+    ret.push_back(tmp);
+    offset += data.length()/2;
+//    while(offset.length() < 4)
+//        offset.push_front("0");
+
+    //Record Type
+    ret.push_back("00");
+
+    //Data
+    ret.push_back(data);
+
+    //CRC
+    QByteArray crc = solveCheckSum(ret);
+
+    ret.push_back(crc);
+
+    //end of line
+    startRet.push_back(ret);
+    startRet.push_back("\r\n");
+
+    return startRet.toUpper();
+}
+
+bool MainWindow::buildOutputFile(const QString &filename)
+{
+  QFile file(filename);
+  if (!file.open(QIODevice::WriteOnly)) return false;
+
+//    :02 00 00 04 08 01 F2
+  file.write(QByteArray(":020000040808EA\r\n"));
+
+  int offset = 0;
+  for(int i = 0; i < 14; ++i) {
+      QByteArray data = dataFromInput(i).toUtf8();
+      QByteArray newRow = buildOutputLine(data, offset);
+      file.write(newRow);
+  }
+
+  file.write(QByteArray("\r\n:00000001FF"));
+
+  file.close();
+  return true;
+}
+
 QString MainWindow::dataFromInput(const int index)
 {
   return this->inputs.at(index)->text();
