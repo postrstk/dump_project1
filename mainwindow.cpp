@@ -59,11 +59,23 @@ void MainWindow::slotRead()
 
 void MainWindow::slotWrite()
 {
+
+    bool a = buildOutputFile("88.hex");
+
+    process = new QProcess(this);
+
+    process->start("cmd.exe",QStringList()<<"/c ST-LINK_CLI.exe -c UR -P 88.hex 0x08080100");
+    if(process->waitForFinished())
+        qDebug() <<"read";
+
+    process->waitForFinished(-1);
+        qDebug() << "Finish read ";
   // Write data from inputs
-    for (int i = 0; i <14;i++)
-    {
-        writeData(i,dataFromInput(i).toDouble());
-    }
+//    for (int i = 0; i <14;i++)
+//    {
+//        writeData(i,dataFromInput(i).toDouble());
+//    }
+//    buildOutputLine("")
 }
 
 void MainWindow::slotConnect()
@@ -438,7 +450,12 @@ QString MainWindow::formatDataFromDouble(const double value)
     ret = "0" + ret;
   }
 
-  return ret;
+  QString retT;
+  for(int i = 0; i < ret.length()-1; i+=2) {
+    retT.push_front(ret.at(i+1));
+    retT.push_front(ret.at(i));
+  }
+  return retT;
 }
 
 bool MainWindow::buildOutputFile(const QString &filename)
@@ -449,14 +466,18 @@ bool MainWindow::buildOutputFile(const QString &filename)
 //    :02 00 00 04 08 01 F2
   file.write(QByteArray(":020000040808EA\r\n"));
 
-  int offset = 0;
+  qDebug() <<"h";
+  int offset = 256;
   int i = 0;
   while(i < 14) {
     QString rawData = "";
     int k = 0;
     while(i < 14 && k < 4) {
       rawData += this->formatDataFromDouble(dataFromInput(i).toDouble());
+      i++;
+      k++;
     }
+
     QByteArray tmp = rawData.toUtf8();
     QByteArray formatData = buildOutputLine(tmp, offset);
     file.write(formatData);
@@ -468,8 +489,7 @@ bool MainWindow::buildOutputFile(const QString &filename)
 //      file.write(newRow);
 //  }
 
-  file.write(QByteArray("\r\n:00000001FF"));
-
+  file.write(QByteArray(":00000001FF"));
   file.close();
   return true;
 }
