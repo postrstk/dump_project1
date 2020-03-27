@@ -68,10 +68,15 @@ void MainWindow::slotWrite()
 
 void MainWindow::slotConnect()
 {
-  this->isConnect = true;
-  ui->button_read->setEnabled(this->isConnect);
-  ui->button_write->setEnabled(this->isConnect);
-//    qDebug() << getCorrectDataFromHex("my_new1.hex");
+    testConnect();
+    bool shit = checkSTMConnect("conection.txt");
+    if(!shit)
+        return;
+
+    this->isConnect = true;
+    ui->button_read->setEnabled(this->isConnect);
+    ui->button_write->setEnabled(this->isConnect);
+    //    qDebug() << getCorrectDataFromHex("my_new1.hex");
 }
 
 double MainWindow::hex2double(const std::string &hex)
@@ -348,7 +353,7 @@ bool MainWindow::checkSTMConnect(const QStringList &list)
   if(list.isEmpty()) {
     return false;
   }
-  QRegularExpression re("No target connected");
+  QRegularExpression re("No target connected|No ST-LINK detected!" );
   foreach(const QString& line, list) {
 
     QRegularExpressionMatch match = re.match(line);
