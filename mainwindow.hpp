@@ -107,6 +107,8 @@ private:
   QByteArray solveCheckSum(QByteArray& bytes);
   QByteArray buildOutputLine(QByteArray& data, int& offset);
 
+  QString formatDataFromDouble(const double value);
+
 public:
     QString getCorrectDataFromHex(const QString& filename);
 

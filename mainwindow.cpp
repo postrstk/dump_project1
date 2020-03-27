@@ -430,6 +430,17 @@ QByteArray MainWindow::buildOutputLine(QByteArray& data, int &offset)
     return startRet.toUpper();
 }
 
+QString MainWindow::formatDataFromDouble(const double value)
+{
+  QString ret = "";
+  ret = QString::fromStdString(this->double2hex(value));
+  while(ret.length() < 16) {
+    ret = "0" + ret;
+  }
+
+  return ret;
+}
+
 bool MainWindow::buildOutputFile(const QString &filename)
 {
   QFile file(filename);
@@ -439,11 +450,23 @@ bool MainWindow::buildOutputFile(const QString &filename)
   file.write(QByteArray(":020000040808EA\r\n"));
 
   int offset = 0;
-  for(int i = 0; i < 14; ++i) {
-      QByteArray data = dataFromInput(i).toUtf8();
-      QByteArray newRow = buildOutputLine(data, offset);
-      file.write(newRow);
+  int i = 0;
+  while(i < 14) {
+    QString rawData = "";
+    int k = 0;
+    while(i < 14 && k < 4) {
+      rawData += this->formatDataFromDouble(dataFromInput(i).toDouble());
+    }
+    QByteArray tmp = rawData.toUtf8();
+    QByteArray formatData = buildOutputLine(tmp, offset);
+    file.write(formatData);
+
   }
+//  for(int i = 0; i < 14; ++i) {
+//      double data = dataFromInput(i).toDouble();
+////      QByteArray newRow = buildOutputLine(data, offset);
+//      file.write(newRow);
+//  }
 
   file.write(QByteArray("\r\n:00000001FF"));
 
