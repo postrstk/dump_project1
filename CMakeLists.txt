@@ -25,6 +25,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core REQUIRED)
 
 if(ANDROID)
   add_library(SomeGUI SHARED
@@ -42,4 +43,4 @@ else()
   )
 endif()
 
-target_link_libraries(SomeGUI PRIVATE Qt5::Widgets)
+target_link_libraries(SomeGUI PRIVATE Qt5::Widgets Qt5::Core)

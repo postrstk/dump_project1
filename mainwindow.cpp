@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QRegularExpression>
 
+
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent)
   , ui(new Ui::MainWindow)
@@ -46,8 +47,10 @@ void MainWindow::slotRead()
 {
     readData();
 
+
     for(int i = 0; i < this->nameF.addr.size(); ++i ) {
       QString tmp = getCorrectDataFromHex(this->nameF.addr[i]);
+      qDebug()<<tmp;
       double f = hex2double(tmp.toStdString());
       setDataToOutput(i,QString::number(f));
       setDataToInput(i, QString::number(f));
@@ -57,7 +60,7 @@ void MainWindow::slotRead()
 void MainWindow::slotWrite()
 {
   // Write data from inputs
-    for (int i = 0; i <13;i++)
+    for (int i = 0; i <14;i++)
     {
         writeData(i,dataFromInput(i).toDouble());
     }
@@ -73,13 +76,17 @@ void MainWindow::slotConnect()
 
 double MainWindow::hex2double(const std::string &hex)
 {
+    if (hex.size() == 0)
+    {
+        std::cout << "Data not read" <<std::endl;
+    }
     union
     {
         long long i;
         double  d;
     } value;
 
-    value.i = std::stoll(hex,nullptr,16);
+    value.i = std::stoull(hex,nullptr,16);
     return value.d;
 }
 
@@ -103,120 +110,118 @@ std::string MainWindow::double2hex(double d)
 
 void MainWindow::readData()
 {
-    QString command="ST-LINK_CLI.exe -c UR -Dump ";
 
     process = new QProcess(this);
+
+    process ->start("cmd.exe", QStringList()<<"/c "<<"del.bat");
+
+    if (process->waitForFinished())
+        qDebug() << "start dell file";
+
+    process->waitForFinished(-1);
+        qDebug() << "all file del";
+
+
+
+    QString command="ST-LINK_CLI.exe -c UR -Dump ";
+
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr1 + " 8 " + nameF.addr[0]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr2 + " 8 " + nameF.addr[1]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr3 + " 8 " + nameF.addr[2]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr4 + " 8 " + nameF.addr[3]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr5 + " 8 " + nameF.addr[4]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr6 + " 8 " + nameF.addr[5]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr7 + " 8 " + nameF.addr[6]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr8 + " 8 " + nameF.addr[7]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr9 + " 8 " + nameF.addr[8]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr10 + " 8 " + nameF.addr[9]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr11 + " 8 " + nameF.addr[10]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr12 + " 8 " + nameF.addr[11]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr13 + " 8 " + nameF.addr[12]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
     process->start("cmd.exe",QStringList()<<"/c "+command + addrRead.addr14 + " 8 " + nameF.addr[13]);
     if(process->waitForFinished())
-    {
         qDebug() <<"read";
-    }
+
     process->waitForFinished(-1);
-    qDebug() << "Finish read ";
+        qDebug() << "Finish read ";
 
 }
 
@@ -394,6 +399,7 @@ QString MainWindow::getCorrectDataFromHex(const QString &filename)
 
   QFile file(filename);
   if(!file.open(QIODevice::ReadOnly)) {
+    qDebug() << "File cant open:" << filename;
     return ret;
   }
   while(!file.atEnd()) {
