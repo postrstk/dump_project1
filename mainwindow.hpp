@@ -59,19 +59,19 @@ struct addr
 struct addrSec
 {
     QString addr1 = "0x08080104";
-    QString addr2 = "0x0808010с";
+    QString addr2 = "0x0808010c";
     QString addr3 = "0x08080114";
-    QString addr4 = "0x0808011с";
+    QString addr4 = "0x0808011c";
     QString addr5 = "0x08080124";
-    QString addr6 = "0x0808012с";
+    QString addr6 = "0x0808012c";
     QString addr7 = "0x08080134";
-    QString addr8 = "0x0808013с";
+    QString addr8 = "0x0808013c";
     QString addr9 = "0x08080144";
-    QString addr10 = "0x0808014с";
+    QString addr10 = "0x0808014c";
     QString addr11 = "0x08080154";
-    QString addr12 = "0x0808015с";
+    QString addr12 = "0x0808015c";
     QString addr13 = "0x08080164";
-    QString addr14 = "0x0808016с";
+    QString addr14 = "0x0808016c";
 };
 
 QT_BEGIN_NAMESPACE
