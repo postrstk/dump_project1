@@ -8,6 +8,8 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QProcess>
+#include <QDateTime>
+#include <QRandomGenerator>
 
 struct nameFile
 {
@@ -106,6 +108,10 @@ private:
   bool buildOutputFile(const QString& filename);
   QByteArray solveCheckSum(QByteArray& bytes);
   QByteArray buildOutputLine(QByteArray& data, int& offset);
+
+  QString getAppKey();
+  QString getDevEui();
+  QString getAppEui();
 
   QString formatDataFromDouble(const double value);
 

@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 //  qDebug() << nameF.addr.size();
 //  testConnect();
 
+  qDebug() << this->getAppKey();
 }
 
 MainWindow::~MainWindow()
@@ -440,6 +441,29 @@ QByteArray MainWindow::buildOutputLine(QByteArray& data, int &offset)
     startRet.push_back("\r\n");
 
     return startRet.toUpper();
+}
+
+QString MainWindow::getAppKey()
+{
+  QDateTime dt;
+  QString ret;
+  QRandomGenerator gen;
+  ret = QString::number(dt.currentDateTime().toMSecsSinceEpoch()) + QString::number(dt.currentDateTime().toMSecsSinceEpoch());
+  while (ret.length() < 32) {
+    int value = gen.bounded(0, 9);
+    ret = ret + QString::number(value);
+  }
+  return ret;
+}
+
+QString MainWindow::getDevEui()
+{
+
+}
+
+QString MainWindow::getAppEui()
+{
+
 }
 
 QString MainWindow::formatDataFromDouble(const double value)
