@@ -1,8 +1,10 @@
 #include "mainwindow.hpp"
-#include "./ui_mainwindow.h"
+
 #include <QDebug>
 #include <QRegularExpression>
 #include <iostream>
+
+#include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -60,10 +62,8 @@ void MainWindow::slotWrite() {
   for (int i = 0; i < cbInputs.size(); ++i) {
     if (cbInputs.at(i)->isChecked()) {
       QString new_value = inputs.at(i)->text();
-      if (new_value.length() > 16)
-        continue; // error
-      while (new_value.length() != 16)
-        new_value = "0" + new_value;
+      if (new_value.length() > 16) continue;  // error
+      while (new_value.length() != 16) new_value = "0" + new_value;
       m_parser.rewriteValue(i + 1, new_value.toUtf8());
     }
   }
@@ -77,8 +77,7 @@ void MainWindow::slotWrite() {
   // hexFile - temp file with code to device
   QString hexFile = m_parser.saveHexFile();
 
-  if (hexFile.size() == 0)
-    return;
+  if (hexFile.size() == 0) return;
 
   //  process = new QProcess(this);
 
@@ -93,6 +92,7 @@ void MainWindow::slotWrite() {
 
   // write keys for future QR code build
   m_logger.write(QStringList() << appEUI << devEUI << appKey);
+  incrementDevEui();
 }
 
 void MainWindow::slotConnect() {
@@ -142,20 +142,18 @@ std::string MainWindow::double2hex(double d) {
   char buf[17];
 
   snprintf(buf, sizeof(buf), "%016llx", value.i);
-  buf[16] = 0; // make sure it is null terminated.
+  buf[16] = 0;  // make sure it is null terminated.
 
   return std::string(buf);
 }
 
 void MainWindow::readData() {
-
   process = new QProcess(this);
 
   process->start("cmd.exe", QStringList() << "/c "
                                           << "del.bat");
 
-  if (process->waitForFinished())
-    qDebug() << "start dell file";
+  if (process->waitForFinished()) qDebug() << "start dell file";
 
   process->waitForFinished(-1);
   qDebug() << "all file del";
@@ -164,8 +162,7 @@ void MainWindow::readData() {
 
   process->start("cmd.exe", QStringList() << "/c " + command + addrRead.addr1 +
                                                  " 8 " + nameF.addr[0]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -173,8 +170,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr2.toUtf8() +
                                                  " 8 " + nameF.addr[1]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -182,8 +178,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr3.toUtf8() +
                                                  " 8 " + nameF.addr[2]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -191,8 +186,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr4.toUtf8() +
                                                  " 8 " + nameF.addr[3]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -200,8 +194,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr5.toUtf8() +
                                                  " 8 " + nameF.addr[4]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -209,8 +202,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr6.toUtf8() +
                                                  " 8 " + nameF.addr[5]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -218,8 +210,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr7.toUtf8() +
                                                  " 8 " + nameF.addr[6]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -227,8 +218,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr8.toUtf8() +
                                                  " 8 " + nameF.addr[7]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -236,8 +226,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr9.toUtf8() +
                                                  " 8 " + nameF.addr[8]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -245,8 +234,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr10.toUtf8() +
                                                  " 8 " + nameF.addr[9]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -254,8 +242,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr11.toUtf8() +
                                                  " 8 " + nameF.addr[10]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -263,8 +250,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr12.toUtf8() +
                                                  " 8 " + nameF.addr[11]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -272,8 +258,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr13.toUtf8() +
                                                  " 8 " + nameF.addr[12]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -281,8 +266,7 @@ void MainWindow::readData() {
   process->start("cmd.exe", QStringList() << "/c " + command +
                                                  addrRead.addr14.toUtf8() +
                                                  " 8 " + nameF.addr[13]);
-  if (process->waitForFinished())
-    qDebug() << "read";
+  if (process->waitForFinished()) qDebug() << "read";
 
   process->waitForFinished(-1);
   qDebug() << "Finish read ";
@@ -298,105 +282,105 @@ void MainWindow::writeData(int num, double data) {
   QString comandF;
   QString comandS;
   switch (num) {
-  case 0:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr1 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr1 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
-  case 1:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr2 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr2 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
-  case 2:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr3 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr3 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 0:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr1 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr1 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
+    case 1:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr2 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr2 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
+    case 2:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr3 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr3 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 3:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr4 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr4 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 3:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr4 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr4 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 4:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr5 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr5 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 4:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr5 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr5 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 5:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr6 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr6 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 5:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr6 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr6 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 6:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr7 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr7 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 6:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr7 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr7 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 7:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr8 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr8 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 7:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr8 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr8 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 8:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr9 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr9 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 8:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr9 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr9 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 9:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr10 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr10 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 9:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr10 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr10 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 10:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr11 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr11 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 10:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr11 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr11 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 11:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr12 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr12 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 11:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr12 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr12 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 12:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr13 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr13 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 12:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr13 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr13 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  case 13:
-    comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr14 + " " + "0x" +
-              QString::fromUtf8(firstHex.c_str());
-    comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr14 + " " + "0x" +
-              QString::fromUtf8(secondHex.c_str());
-    break;
+    case 13:
+      comandF = "ST-LINK_CLI.exe -c UR -w32 " + adr1.addr14 + " " + "0x" +
+                QString::fromUtf8(firstHex.c_str());
+      comandS = "ST-LINK_CLI.exe -c UR -w32 " + adr2.addr14 + " " + "0x" +
+                QString::fromUtf8(secondHex.c_str());
+      break;
 
-  default:
-    return;
-    break;
+    default:
+      return;
+      break;
   }
 
   process = new QProcess(this);
@@ -435,7 +419,6 @@ bool MainWindow::checkSTMConnect(const QStringList &list) {
   }
   QRegularExpression re("No target connected|No ST-LINK detected!");
   foreach (const QString &line, list) {
-
     QRegularExpressionMatch match = re.match(line);
     if (match.hasMatch()) {
       return false;
@@ -477,14 +460,12 @@ QByteArray MainWindow::buildOutputLine(QByteArray &data, int &offset) {
 
   // Byte count
   QByteArray tmp = QString::number(data.length() / 2, 16).toUpper().toUtf8();
-  if (tmp.length() == 1)
-    tmp = "0" + tmp;
+  if (tmp.length() == 1) tmp = "0" + tmp;
   ret.push_back(tmp);
 
   // Address
   tmp = QString::number(offset, 16).toUpper().toUtf8();
-  while (tmp.length() < 4)
-    tmp.push_front("0");
+  while (tmp.length() < 4) tmp.push_front("0");
   ret.push_back(tmp);
   offset += data.length() / 2;
   //    while(offset.length() < 4)
@@ -523,6 +504,26 @@ QString MainWindow::getAppKey() {
 
 QString MainWindow::getDevEui() { return ui->input_deveui->text(); }
 
+void MainWindow::incrementDevEui() {
+  QString first = ui->input_deveui->text().mid(0, 8);
+  QString second = ui->input_deveui->text().mid(9, 8);
+
+  if (second.toUpper() == "FFFFFFFF") {
+    uint tmp = first.toUInt(nullptr, 16);
+    tmp++;
+    first.setNum(tmp, 16);
+    while (first.size() != 8) first = "0" + first;
+    second = "00000000";
+  } else {
+    uint tmp = second.toUInt(nullptr, 16);
+    tmp++;
+    second.setNum(tmp, 16);
+    while (second.size() != 8) second = "0" + second;
+  }
+
+  ui->input_deveui->setText(first.toUpper() + second.toUpper());
+}
+
 QString MainWindow::getAppEui() { return ui->input_appeui->text(); }
 
 QString MainWindow::formatDataFromDouble(const double value) {
@@ -542,8 +543,7 @@ QString MainWindow::formatDataFromDouble(const double value) {
 
 bool MainWindow::buildOutputFile(const QString &filename) {
   QFile file(filename);
-  if (!file.open(QIODevice::WriteOnly))
-    return false;
+  if (!file.open(QIODevice::WriteOnly)) return false;
 
   //    :02 00 00 04 08 01 F2
   file.write(QByteArray(":020000040808EA\r\n"));

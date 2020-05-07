@@ -1,4 +1,5 @@
 #include "hexparser.hpp"
+
 #include <QDebug>
 
 HexParser::HexParser() {}
@@ -14,8 +15,7 @@ bool HexParser::openHexFile(const QString &fileName) {
 
   QVector<QString> tmpVecData = tmpData.split(QRegExp("[\r\n]")).toVector();
   foreach (auto node, tmpVecData) {
-    if (node.length() == 0)
-      continue;
+    if (node.length() == 0) continue;
     m_hexData.push_back(node.toUtf8());
     if (node == ":020000040808EA") {
       m_valueSectionIndex = m_hexData.size() - 1;
@@ -37,8 +37,7 @@ QString HexParser::saveHexFile(const QString &fileName) {
 }
 
 void HexParser::rewriteValue(int value_index, const QByteArray &new_value) {
-  if (m_valueSectionIndex == -1)
-    return;
+  if (m_valueSectionIndex == -1) return;
 
   int index_to_rewrite =
       m_valueSectionIndex +

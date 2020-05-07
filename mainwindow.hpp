@@ -110,6 +110,7 @@ private:
 
   QString getAppKey();
   QString getDevEui();
+  void incrementDevEui();
   QString getAppEui();
 
   QString formatDataFromDouble(const double value);

@@ -8,14 +8,15 @@
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
 
-  //  HexParser parser;
-
-  //  parser.openHexFile("my_new1.hex");
-  //  parser.setLorawanKeys("3333333333333333", "5555555555555555",
-  //                        "77777777777777777777777777777777");
-  //  parser.rewriteValue(14, "5555555555555555");
-
-  //  qDebug() << parser.saveHexFile();
+  //  QString ba("00FFFFFF");
+  //  qDebug() << ba;
+  //  uint tmp = ba.toUInt(nullptr, 16);
+  //  qDebug() << tmp;
+  //  tmp++;
+  //  qDebug() << tmp;
+  //  ba.setNum(tmp, 16);
+  //  while (ba.size() != 8) ba = "0" + ba;
+  //  qDebug() << ba.toUpper();
 
   MainWindow w;
   w.show();
