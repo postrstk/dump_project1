@@ -41,6 +41,8 @@ else()
     mainwindow.hpp
     hexparser.cpp
     hexparser.hpp
+    keylogger.hpp
+    keylogger.cpp
     mainwindow.ui
   )
 endif()

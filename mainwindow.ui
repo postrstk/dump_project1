@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>596</width>
-    <height>928</height>
+    <width>674</width>
+    <height>945</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,18 +46,27 @@ font: 10pt &quot;MS Shell Dlg 2&quot;;
 }
 QLineEdit {
 border: 1px solid #757575;
-min-width: 150px;
-max-width: 150px;
+min-width: 170px;
+max-width: 170px;
 min-height: 40px;
 font: 10pt &quot;MS Shell Dlg 2&quot;;
 }</string>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_16">
+   <layout class="QHBoxLayout" name="horizontalLayout_18">
     <property name="spacing">
-     <number>20</number>
+     <number>50</number>
     </property>
-    <property name="sizeConstraint">
-     <enum>QLayout::SetMinimumSize</enum>
+    <property name="leftMargin">
+     <number>10</number>
+    </property>
+    <property name="topMargin">
+     <number>10</number>
+    </property>
+    <property name="rightMargin">
+     <number>10</number>
+    </property>
+    <property name="bottomMargin">
+     <number>10</number>
     </property>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -65,41 +74,128 @@ font: 10pt &quot;MS Shell Dlg 2&quot;;
        <number>30</number>
       </property>
       <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="button_connect">
+       <widget class="QPushButton" name="button_load_file">
         <property name="text">
-         <string>Подключение</string>
+         <string>Загрузить hex файл</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="button_read">
+       <widget class="QPushButton" name="button_connect">
         <property name="text">
-         <string>Считать</string>
+         <string>Подключиться к устройству</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="button_write">
         <property name="text">
-         <string>Записать</string>
+         <string>Прошить устройство</string>
         </property>
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_16">
+          <item>
+           <widget class="QLabel" name="label_17">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+border: 0px;
+	font: 75 12pt &quot;MS Shell Dlg 2&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>AppEUI</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_17">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="input_appeui">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+border: 1px solid #757575;
+min-width:  300px;
+max-width: 300px;
+min-height: 40px;
+font: 10pt &quot;MS Shell Dlg 2&quot;;
+}</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_17">
+          <item>
+           <widget class="QLabel" name="label_18">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+border: 0px;
+	font: 75 12pt &quot;MS Shell Dlg 2&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>DevEUI</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_18">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="input_deveui">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+border: 1px solid #757575;
+min-width:  300px;
+max-width: 300px;
+min-height: 40px;
+font: 10pt &quot;MS Shell Dlg 2&quot;;
+}</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -121,29 +217,17 @@ font: 10pt &quot;MS Shell Dlg 2&quot;;
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_15">
         <item>
-         <widget class="QLabel" name="label_17">
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-border: 0px;
-min-width:50px;
-max-width:50px;
-}</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QLabel" name="label_16">
           <property name="styleSheet">
            <string notr="true">QLabel{
 border: 0px;
 	font: 75 12pt &quot;MS Shell Dlg 2&quot;;
+min-width: 130px;
+max-width:130px;
 }</string>
           </property>
           <property name="text">
-           <string>Outputs</string>
+           <string>Переписать</string>
           </property>
          </widget>
         </item>
@@ -169,7 +253,7 @@ border: 0px;
 }</string>
           </property>
           <property name="text">
-           <string>Inputs</string>
+           <string>Коэффициенты</string>
           </property>
          </widget>
         </item>
@@ -191,14 +275,17 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_0">
+         <widget class="QCheckBox" name="checkBox_0">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
+          </property>
+          <property name="tristate">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_5">
+         <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -231,9 +318,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_1">
+         <widget class="QCheckBox" name="checkBox_1">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -271,9 +358,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_2">
+         <widget class="QCheckBox" name="checkBox_2">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -311,9 +398,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_3">
+         <widget class="QCheckBox" name="checkBox_3">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -351,9 +438,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_4">
+         <widget class="QCheckBox" name="checkBox_4">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -391,9 +478,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_5">
+         <widget class="QCheckBox" name="checkBox_5">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -431,9 +518,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_6">
+         <widget class="QCheckBox" name="checkBox_6">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -471,9 +558,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_7">
+         <widget class="QCheckBox" name="checkBox_7">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -511,9 +598,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_8">
+         <widget class="QCheckBox" name="checkBox_8">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -551,9 +638,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_9">
+         <widget class="QCheckBox" name="checkBox_9">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -591,9 +678,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_10">
+         <widget class="QCheckBox" name="checkBox_10">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -631,9 +718,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_11">
+         <widget class="QCheckBox" name="checkBox_11">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -671,9 +758,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_12">
+         <widget class="QCheckBox" name="checkBox_12">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -711,9 +798,9 @@ min-width:50px;
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="output_13">
+         <widget class="QCheckBox" name="checkBox_13">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -735,6 +822,19 @@ min-width:50px;
         </item>
        </layout>
       </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </item>
    </layout>
@@ -744,7 +844,7 @@ min-width:50px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>596</width>
+     <width>674</width>
      <height>25</height>
     </rect>
    </property>
