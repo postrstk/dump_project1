@@ -1,19 +1,25 @@
-#include "mainwindow.hpp"
-
 #include <QApplication>
 #include <QDebug>
 #include <QDateTime>
+
+#include "mainwindow.hpp"
+#include "hexparser.hpp"
 
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
 
-  QDateTime dt;
-  QString key;
-  key = QString::number(dt.currentDateTime().toMSecsSinceEpoch()) + QString::number(dt.currentDateTime().toMSecsSinceEpoch());
-  qDebug() << key;
+  HexParser parser;
 
-  MainWindow w;
+  parser.openHexFile("my_new1.hex");
+  parser.setLorawanKeys("3333333333333333",
+                        "5555555555555555",
+                        "77777777777777777777777777777777");
+  parser.rewriteValue(14, "5555555555555555");
+
+  qDebug() << parser.saveHexFile();
+
+//  MainWindow w;
 //  w.show();
   return a.exec();
 }

@@ -39,6 +39,8 @@ else()
     main.cpp
     mainwindow.cpp
     mainwindow.hpp
+    hexparser.cpp
+    hexparser.hpp
     mainwindow.ui
   )
 endif()
